@@ -1,0 +1,252 @@
+Assignment - 1
+A good program must be time efficient and memory efficient. Performance of a program can be improved by optimizing the code. Optimizing can be done at design level and source code level	
+
+Identify different ways to solve a problem and choose the best algorithm
+1.	 Finding a prime number 
+
+import java.util.Scanner;
+class prime { 
+  
+    static boolean check(int n) 
+    {  
+        if (n < 2) 
+            return false; 
+  
+        for (int i = 2; i < Math.sqrt(n); i++)   
+            if (n % i == 0) 
+                return false; 
+  
+        return true; 
+    } 
+  
+    public static void main(String args[]) 
+    { 
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Enter a number:");
+	int n = sc.nextInt();
+        if (check(n)) 
+            System.out.println("Prime number"); 
+        else
+            System.out.println("Not a prime number");  
+    } 
+} 
+
+
+
+
+2.	To find whether a  number is Armstrong number 
+
+package com.telstra.pack1;
+import java.util.Scanner;
+
+import java.util.Scanner;
+
+public class Armstrong {
+
+	public static int nn(int num)
+	{
+		int n = 0;
+		while(num!=0)
+		{
+		n++;
+		num /= 10;
+		}
+	return n;
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a number:");
+		int num = sc.nextInt();  //  take data into string cal length...
+		int no = num;
+		int sum = 0;
+		
+		int x = nn(num);
+		
+		while(num!=0)
+		{
+			sum = (int) (sum + (Math.pow(num % 10,x)));
+			num /= 10;
+		}
+		System.out.println(sum);
+		if(sum == no)
+		{
+		System.out.println("Armstrong Number");
+		}
+		else
+			System.out.println("Not an Armstrong Number");
+	}
+
+}
+
+
+ 
+3.	To find  palindrome words in a given string
+
+class Pallindrome{ 
+      
+    public static void main(String args[]) 
+    { 
+    	PallinCheck p1 = new PallinCheck();
+    	System.out.println(p1.countPalin("mam dad abc xyz nitin"));
+    } 
+} 
+
+
+public class PallinCheck {
+
+	 static boolean check(String word) 
+	    { 
+	        int n = word.length(); 
+	        word = word.toLowerCase(); 
+	        for (int i=0; i<n; i++,n--) 
+	           if (word.charAt(i) != (word.charAt(n - 1))) 
+	              return false;        
+	        return true; 
+	    } 
+	      
+	    static int countPalin(String str) 
+	    {         
+	        str = str + " "; 
+	          
+	        String word = ""; 
+	        int count = 0; 
+	        for (int i = 0; i < str.length(); i++) 
+	        { 
+	            char ch = str.charAt(i); 
+	              
+	            if (ch != ' ') 
+	                word = word + ch; 
+	            else { 
+	                if (check(word)) 
+	                    count++; 
+	                word = ""; 
+	            } 
+	        } 
+	          
+	        return count; 
+	    } 
+}
+
+
+
+4.	To remove all the duplicate  elements in an integer array
+
+import java.util.*;
+public class Duplicate {
+	 
+
+	  public static void main(String args[])
+	  {
+		List<Integer> l=new ArrayList<Integer>();
+		l.add(1);
+		l.add(2);
+		l.add(3);
+		l.add(1);
+		l.add(3);
+		l.add(6);
+		l.add(6);
+
+		HashSet<Integer> h=new HashSet<Integer>();
+		List<Integer> l1=new ArrayList<Integer>();
+		for(Integer i: l)
+		{
+		if(!h.contains(i))
+		{
+			h.add(i);
+		}
+		else
+		{
+			l1.add(i);
+		}
+		}
+		System.out.println("Duplicate elements are:");
+		for(int j: l1)
+		{
+		System.out.println(j);
+		}
+		System.out.println("Unique elements are:");
+		for(int j: h)
+		{
+		System.out.println(j);
+		}
+		}
+	  }
+
+
+
+
+
+Assignment – 2
+Conduct the Loop Optimisation for the following  source code  to improve the program’s performance.
+1.
+for (i=1; i<count; i++) { 
+	a[i] = i*j*k*l*m*n; 
+} 
+
+Output: 	int mul = j*k*l*m*n;
+			for (i=1; i<count; i++) { 
+			a[i] = i*mul; 
+				} 
+
+2.
+for (discount = 0; discount < numD; discount++) 
+{ 
+ for (rate = 0; rate < numR; rate++) 
+ { 
+     rateTbl[rate] = rateTbl[rate] * discountTbl[discount]; 
+ } 
+} 
+
+Output:  		
+				
+
+3.
+for (i=1; i<count; i++) { 
+   a[i] = Math.pow(log(i) / log(3), 2); 
+} 
+
+Output:			double d1 = Math.log(3);
+				for (i=1; i<count; i++) { 
+				a[i] = Math.pow(log(i) / d1, 2); 
+				} 
+
+
+Assignment-3
+
+1. What is the result that will be printed out ?
+public class Test{
+public static void main(String[] args)
+{
+ float f=(1/4) *10;
+int i = Math.round(f);
+System.out.println(i);
+}}
+
+Output:   0
+
+2.
+Which of the following are valid declarations?
+1. int i = 0XCAFE;
+2. boolean b = 0;
+3. char c = 'A';
+4. byte b = 128;
+5. char c = ""A"";"
+
+Output:   1 and 3 are valid declarations
+
+
+3. 
+class Test{
+ public static void main(String [] args){
+ int x= 2;
+ int y= 1;
+ for (int z = 0; z < 5; z++){
+  if (( ++x > 2 ) || (++y > 2)){
+   x++;
+ }}
+ System.out.println(x + "" "" + y);
+ }
+}
+What is the output of the program?
+
+Output:    Syntax error on token """", delete this token

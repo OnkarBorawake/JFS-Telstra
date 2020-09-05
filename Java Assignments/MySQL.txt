@@ -1,0 +1,182 @@
+
+Table: telstra_database.book
+
+bookid		bname			bprice
+1			Maths			100
+2			Eng				200
+3			Java			300
+4			Python			350
+5			React			500
+6			React			550
+7			JavaScript		700
+8			jeabc			600
+9			Rabc			200
+70			abc				700
+80			CSharp			400
+
+Table: telstra_database.orders
+
+ordersid	bookid		ordersdate
+100			1			28-08-2020
+200			2			26-07-2020
+300			5			25-08-2020
+400			9			01-07-2020
+
+
+
+
+
+
+SELECT * FROM telstra_database.book;                     -- normal select stmt
+
+
+
+insert into telstra_database.book values(7,"JavaScript",700); -- insert into stmt
+
+
+
+select distinct bname from telstra_database.book;        -- distinct keyword
+
+
+
+select count(distinct bname) from telstra_database.book; -- count distinct
+
+
+
+select * from telstra_database.book where bookid = 2;    -- where clause
+
+
+
+select * from telstra_database.book where (bname = 'Java' 
+OR bname = 'React');                                     -- OR Keyword 
+
+
+
+select * from telstra_database.book order by bname;       -- order by asc
+
+
+
+select * from telstra_database.book order by bname desc;  -- order by desc
+
+
+
+select * from telstra_database.book order by bname asc, 
+bprice desc;                                              -- order by for several columns
+
+
+
+insert into telstra_database.book (bookid,bname) values 
+(7,"JavaScript");                                         -- error since no default for bprice
+
+
+
+select TOP 2 from telstra_database.book;                  -- will work for sql server/ ms access server
+
+
+
+select * from telstra_database.book limit 2;              -- will work for mysql
+
+
+
+select * from telstra_database.book order by bprice desc, bookid desc limit 1;  -- highest price
+
+
+
+select * from telstra_database.book where rownum <= 3;    -- will work for oracle
+
+
+
+select * from telstra_database.book where bname = "React" 
+order by bprice desc limit 1;                             -- order by + limit
+
+
+
+select * from telstra_database.book limit 2,3;            -- start from offset 2 & take 3 records
+
+
+
+select * from telstra_database.book limit 50 PERCENT;     -- didnt work (ask Mam)
+
+
+
+select * from telstra_database.book having count(bookid)/2);  -- tried
+SELECT TOP 50 PERCENT * FROM Customers;  
+
+
+
+select * from telstra_database.book where bname like 'J%'; -- pattern start from J, end with any char
+
+
+
+select * from telstra_database.book where bname like '_a%'; -- 2nd char should be 'a' end with any char
+
+
+
+select * from telstra_database.book where bname like 'j%' or bname like 'r%'; --  work (ask Mam)
+
+
+
+select * from telstra_database.book where bname like '[jr]';  -- not working
+
+
+
+select * from telstra_database.book where bname in ('Java', 'English'); -- In operator
+
+
+
+select orders.ordersid, book.bname, orders.ordersdate from 
+telstra_database.orders 
+Inner Join telstra_database.book on orders.bookid = book.bookid;   -- Inner Join
+
+
+
+select orders.ordersid, book.bname, orders.ordersdate from 
+telstra_database.orders 
+Left Join telstra_database.book on orders.bookid = book.bookid;    -- Left Join
+
+
+
+select orders.ordersid, book.bname, orders.ordersdate from 
+telstra_database.orders 
+Right Join telstra_database.book on orders.bookid = book.bookid;   -- Right Join
+
+
+
+select orders.ordersid, book.bname, orders.ordersdate from 
+telstra_database.orders 
+Cross Join telstra_database.book;   -- cross join will give cartesian product & it differs from full outer join
+
+
+
+select B1.bname as BookName1, B2.bname as BookName2, B1.bookid from 
+telstra_database.book B1, telstra_database.book B2 where 
+B1.bookid <> B2.bookid AND B1.bname = B2.bname;                  -- self join
+
+
+
+select * from telstra_database.book union 
+select * from telstra_database.orders;            -- full outer join cant be done using 'full outer join' keyword in mysql. Therefore used UNION keyword.
+
+
+
+select count(bookid), bname from telstra_database.book 
+group by bname order by count(bookid) desc; 
+
+
+
+select count(bookid), bname from telstra_database.book 
+group by bname having bname like 'r%' order by count(bookid) desc;         -- group by
+
+
+
+select orders.bookid, count(orders.ordersid) from 
+telstra_database.orders left join telstra_database.book 
+on orders.bookid = book.bookid group by bname;               -- group by with join
+
+
+
+-- where keyword couldnt be used with aggregate funs ; so use having
+select count(bookid), bname from telstra_database.book 
+group by bname having count(bookid) >= 1;                      -- having clause
+	
+
